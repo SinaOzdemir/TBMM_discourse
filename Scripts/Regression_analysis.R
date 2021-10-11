@@ -12,7 +12,7 @@
 
 library(pacman)
 
-packs<- c("tidyverse","psych","here")
+packs<- c("tidyverse","rcompanion","here")
 
 p_load(char = packs, install = T)
 
@@ -56,6 +56,13 @@ parties <- grep(x = unique(as.character(data$a_party)),pattern = "5301|5302|5303
 years<- unique(data$year)
 
 
+a<-data %>% filter(a_party == "5304" & year == 2009)
+b<- table(factor(a$i_position_pos,levels = c(0,1)),factor(a$modernization,levels = c(0,1)))
+c<- matrix(b, nrow = 2, ncol = 2)
+d<- cramerV(x = c,ci = T,conf = .95,bias.correct = F)
+e<- DescTools::TschuprowT(x = c,correct = T)
+f<- DescTools::YuleQ(x = c)
+g<- DescTools::YuleY(x = c)
 # phi coefficient[DEPRICATED DO NOT RUN!!!] ---------------------------------------------------------
 frames<- colnames(data)[15:24]
 positions<- colnames(data)[34:36]
